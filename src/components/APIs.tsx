@@ -1,12 +1,15 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-
+const managerURL = import.meta.env.VITE_MANAGERURL;
+const candidateURL = import.meta.env.VITE_CANDIDATEURL;
+const url = import.meta.env.VITE_URL;
 export default{
+    
     get:{
 
         fetchCandidate: async ()=>{
             try{
-                const res = await  axios.get('http://localhost:8000/v1/manager/fetch-candidates',{
+                const res = await  axios.get(`${managerURL}/fetch-candidates`,{
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('authToken')}`
                 } 
@@ -21,7 +24,7 @@ export default{
         
         fetchJobData: async () =>{
             try{
-                const res = await axios.get('http://localhost:8000/v1/candidate/fetch-jobs',{
+                const res = await axios.get(`${candidateURL}/fetch-jobs`,{
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
                     }
@@ -41,7 +44,7 @@ export default{
     post:{
 
         register: async (data: { first_name: string; last_name: string; email: string; password: string; role: string; })=>{
-                const res = await axios.post('http://localhost:8000/v1/api/registration', data);
+                const res = await axios.post(`${url}/registration`, data);
                 if(res.status === 200)
                 {
                     return res.data;                    
@@ -59,7 +62,7 @@ export default{
 
         login: async (loginData: { email: string; password: string; role: string; }) =>{
             try{
-                const res = await axios.post('http://localhost:8000/v1/api/login', loginData)
+                const res = await axios.post(`${url}/login`, loginData)
                 console.log(res.data)
                 return res.data;
             }
@@ -86,7 +89,7 @@ export default{
 
         jobStatus: async (data: { candidate_id: number; job_id: number; }) =>{
             try{
-                const res = await axios.post('http://localhost:8000/v1/candidate/job-status-check', data,{
+                const res = await axios.post(`${candidateURL}/job-status-check`, data,{
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
 
@@ -104,7 +107,7 @@ export default{
         
         postJob : async (combinedData: { manager_id: number | null; title: string; description: string; salary: number; location: string; job_type: string; experience_level: string; skills: string; application_deadline: Date; status: string; }) =>{
             try{
-                const res = await axios.post('http://localhost:8000/v1/manager/manager-post', combinedData,{
+                const res = await axios.post(`${managerURL}/manager-post`, combinedData,{
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
                     }
@@ -121,7 +124,7 @@ export default{
 
         assignInterviewDate: async (data: { job_id: number; candidate_id: number; interview_date: string; }) =>{
             try{
-                const res = await axios.post('http://localhost:8000/v1/manager/assign-interview', data,{
+                const res = await axios.post(`${managerURL}/assign-interview`, data,{
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
                     }
@@ -140,7 +143,7 @@ export default{
 
         applyForJob: async (data: { candidate_id: number;  job_id: number; resume_url: string; })=>{
             try{
-                const res = await axios.put('http://localhost:8000/v1/candidate/apply-job', data, {
+                const res = await axios.put(`${candidateURL}/apply-job`, data, {
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
 
@@ -158,7 +161,7 @@ export default{
   
         FindInterviewData: async(data: { candidate_id: number; job_id: number; }) => {
             try{
-                const res = await axios.put('http://localhost:8000/v1/candidate/interview-status-check', data, {
+                const res = await axios.put(`${candidateURL}/interview-status-check`, data, {
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
                     }
@@ -175,7 +178,7 @@ export default{
 
         FetchCandidates: async(manager_id: number) => {
             try{
-                const res = await axios.put('http://localhost:8000/v1/manager/fetch-candidates', {manager_id}, {
+                const res = await axios.put(`${managerURL}/fetch-candidates`, {manager_id}, {
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
                     }
@@ -193,7 +196,7 @@ export default{
 
         FetchCandidatesInfo: async(manager_id: number) => {
             try{
-                const res = await axios.put('http://localhost:8000/v1/manager/fetch-candidates-info', {manager_id}, {
+                const res = await axios.put(`${managerURL}/fetch-candidates-info`, {manager_id}, {
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
                     }
@@ -211,7 +214,7 @@ export default{
         FetchCandidate: async (candidate_id: number, job_id: number) => {
             try 
             {
-              const res = await axios.put('http://localhost:8000/v1/manager/getCandidate', { candidate_id, job_id }, {
+              const res = await axios.put(`${managerURL}/getCandidate`, { candidate_id, job_id }, {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem('authToken')}`,
                 },
@@ -228,7 +231,7 @@ export default{
 
         UpdateCandidateStatus: async (data: { candidate_id: number; job_id: number; status: string; manager_id: number }) => {
             try {
-              const res = await axios.put('http://localhost:8000/v1/manager/update-status', data, {
+              const res = await axios.put(`${managerURL}/update-status`, data, {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem('authToken')}`
                 }
@@ -241,7 +244,7 @@ export default{
 
         updateFinalResult: async (data: { candidate_id: number; job_id: number; interview_result: string; }) =>{
             try {
-                const res = await axios.put('http://localhost:8000/v1/manager/update-interview-status', data, {
+                const res = await axios.put(`${managerURL}/update-interview-status`, data, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('authToken')}`
                 }
@@ -255,7 +258,7 @@ export default{
 
         FinalInterviewResult: async (data : {candidate_id: number, job_id: number}) =>{
             try {
-                const res = await axios.put('http://localhost:8000/v1/candidate/interview-status-check', data, {
+                const res = await axios.put(`${candidateURL}/interview-status-check`, data, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('authToken')}`
                 }
