@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import APIs from "./APIs";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export function Login({
@@ -153,10 +153,11 @@ export function Login({
               </div>
               <Button className="w-full mt-2">Sign in</Button>
               <div className=" text-center text-sm">
-                Don't have an account?{" "}
-                <a href="./Signup" className="underline">
+                Don't have an account ?{" "}
+                {/* <a href="./Signup" className="underline">
                   Sign Up
-                </a>
+                </a> */}
+                <Link to='/Signup' className="underline">Sign in</Link>
               </div>
             </CardContent>
           </Card>

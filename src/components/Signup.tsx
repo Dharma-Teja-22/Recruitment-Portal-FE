@@ -12,6 +12,7 @@ import { Button } from "./ui/button";
 import APIs from "./APIs";
 import { toast, ToastContainer } from "react-toastify";
 import { z } from "zod";
+import { Link } from "react-router-dom";
 
 const signupSchema = z.object({
   first_name: z
@@ -175,10 +176,12 @@ export function Signup(): JSX.Element {
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
-                <a href="./Login" className="underline">
+                Already have an account ?{" "}
+                {/* <a href="./Login" className="underline">
                   Sign in
-                </a>
+                </a> */}
+                <Link to='/login' className="underline">Login
+                </Link>
               </div>
             </CardContent>
           </Card>
