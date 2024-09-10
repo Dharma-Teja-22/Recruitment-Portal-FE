@@ -52,7 +52,7 @@ const AppliedJobs: React.FC = () => {
 
         if (response === "Pending") {
           toast.info(response);
-        } else if (response.includes("Interview") || response.includes("Selected")) {
+        } else if (response.includes("Interview") || response.includes("Selected") || response.includes("Rejected"))  {
           toast.success(response);
         }
       } catch (error) {

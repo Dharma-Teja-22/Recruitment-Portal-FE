@@ -47,9 +47,13 @@ const UpdateFinalResult: React.FC = () => {
     }
   };
 
-  const handleReject = (candidate_id: number, job_id: number) => {
+  const handleReject = (candidate_id: number, job_id: number, email: string, title: string) => {
     APIs.put
-      .updateFinalResult({ candidate_id: candidate_id, job_id: job_id, interview_result: 'Rejected' })
+      .updateFinalResult({
+        candidate_id: candidate_id, job_id: job_id, interview_result: 'Rejected', email: email,
+        title: title,
+        interview_date: ''
+      })
       .then((res) => {
         if (res === "Unsuccessful. Due to the Interview Date is in past." || res === "Already candidate is rejected" || res === "Already Selected") {
           toast.warning(res);
@@ -70,9 +74,9 @@ const UpdateFinalResult: React.FC = () => {
       });
   };
 
-  const handleInterviewUpdate = (candidate_id: number, job_id: number) => {
+  const handleInterviewUpdate = (candidate_id: number, job_id: number, email: string, title: string, interview_date: string) => {
     APIs.put
-      .updateFinalResult({ candidate_id: candidate_id, job_id: job_id, interview_result: 'Selected' })
+      .updateFinalResult({ candidate_id: candidate_id, job_id: job_id, interview_result: 'Selected', email: email, title: title, interview_date: interview_date })
       .then((res) => {
         if (res === "Unsuccessful. Due to the Interview Date is in past." || res === "Already Selected" || res === "Already candidate is rejected") {
           toast.warning(res);
@@ -146,14 +150,14 @@ const UpdateFinalResult: React.FC = () => {
                       (candidate.status === 'Interview' || candidate.interview_result == 'Pending') && (
                         <div className="flex justify-center space-x-4">
                           <button
-                            onClick={() => handleInterviewUpdate(candidate.candidate_id, candidate.job_id)}
+                            onClick={() => handleInterviewUpdate(candidate.candidate_id, candidate.job_id, candidate.email, candidate.title, candidate.interview_date)}
                             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
                             disabled={!isPastDate(candidate.interview_date)}
                           >
                             Select
                           </button>
                           <button
-                            onClick={() => handleReject(candidate.candidate_id, candidate.job_id)}
+                            onClick={() => handleReject(candidate.candidate_id, candidate.job_id, candidate.email, candidate.title)}
                             disabled={!isPastDate(candidate.interview_date)}
                             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
                           >

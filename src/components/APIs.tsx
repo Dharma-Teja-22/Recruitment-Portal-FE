@@ -242,7 +242,7 @@ export default{
             }
         },
 
-        updateFinalResult: async (data: { candidate_id: number; job_id: number; interview_result: string; }) =>{
+        updateFinalResult: async (data: { candidate_id: number; job_id: number; interview_result: string; email: string; title: string; interview_date:string}) =>{
             try {
                 const res = await axios.put(`${managerURL}/update-interview-status`, data, {
                 headers: {
