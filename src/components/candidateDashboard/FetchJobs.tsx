@@ -55,7 +55,7 @@ function FetchJobs() {
               key={job.job_id}
               className="bg-white shadow-2xl rounded-lg overflow-hidden"
             >
-              <div className="p-6">
+              <div className="p-6"> 
                 <h2 className="text-xl font-bold mb-2 text-center text-cyan-900 ">
                    {job.title}
                 </h2>

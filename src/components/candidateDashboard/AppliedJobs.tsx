@@ -52,7 +52,7 @@ const AppliedJobs: React.FC = () => {
 
         if (response === "Pending") {
           toast.info(response);
-        } else if (response.includes("Interview")) {
+        } else if (response.includes("Interview") || response.includes("Selected")) {
           toast.success(response);
         }
       } catch (error) {
@@ -69,7 +69,7 @@ const AppliedJobs: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-4 bg-gray-100 min-h-screen">
       <div className="flex items-center ml-4">
         <button onClick={() => navigate(-1)} className="text-2xl text-blue-500 hover:text-blue-600 transition">
           ← 

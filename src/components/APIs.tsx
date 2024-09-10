@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 const managerURL = import.meta.env.VITE_MANAGERURL;
 const candidateURL = import.meta.env.VITE_CANDIDATEURL;
 const url = import.meta.env.VITE_URL;
+const dashboard = import.meta.env.VITE_DASHBOARD;
 export default{
     
     get:{
@@ -79,7 +80,7 @@ export default{
               if (!candidateId) {
                 throw new Error('Candidate ID is required');
               }
-              const res = await axios.post(`http://localhost:8000/v1/dashboard/get-jobs`,{candidateId});
+              const res = await axios.post(`${dashboard}/get-jobs`,{candidateId});
               return res.data;
             } catch (err) {
               console.error('Error fetching candidate jobs:', err);
@@ -92,7 +93,6 @@ export default{
                 const res = await axios.post(`${candidateURL}/job-status-check`, data,{
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
-
                     }
                 })
              
