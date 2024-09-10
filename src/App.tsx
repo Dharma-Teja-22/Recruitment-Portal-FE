@@ -21,10 +21,6 @@ import FetchCandidates from "./components/managerDashboard/FetchCandidates";
 import CandidateProfile from "./components/managerDashboard/CandidateProfile";
 import CandidateTable from "./components/managerDashboard/CandidateTable";
 import AssignInterviewDates from "./components/managerDashboard/AssignInterviewDates";
-import Task from "./components/react-tasks/Task";
-import Task3 from "./components/react-tasks/Task3";
-import FormData from "./components/react-tasks/FormData";
-import Date from "./components/react-tasks/Date"
 import UpdateFinalResult from "./components/managerDashboard/UpdateFinalResult";
 import SelectedCandidates from "./components/managerDashboard/SelectedCandidates";
 function App() {
@@ -71,12 +67,7 @@ function App() {
             </>
           ) : null}
 
-          <Route path="/*" element={<ErrorPage/>} ></Route>
-          <Route path="/task" element={<Task/>}/>
-          <Route path="/task3" element={<Task3/>}/>
-          <Route path="/formdata" element={<FormData/>} />
-          <Route path="/timeZones" element={<Date/>} />
-          
+          <Route path="/*" element={<ErrorPage/>} ></Route>          
         </Routes>
       </BrowserRouter> 
     </>
