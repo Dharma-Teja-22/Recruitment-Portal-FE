@@ -183,7 +183,7 @@ export function Signup(): JSX.Element {
                 <Link to='/login' className="underline">Login
                 </Link>
               </div>
-            </CardContent>
+            </CardContent> 
           </Card>
         </form>
 
